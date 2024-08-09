@@ -59,7 +59,7 @@ def load_remote_function(url, local_cache_path="get_url_by_sku_cached.py"):
     exec(code, globals())
 
 # Пример использования
-url = "https://gitlab.mpstats.io/bigdata/shared-utils/wb/images_retrieval/get_url_by_sku.py"
+url = "https://gitlab.mpstats.io/bigdata/shared-utils/-/raw/main/wb/images_retrieval/wb_get_url_by_sku.py?inline=false"
 load_remote_function(url)
 
 # Теперь функция доступна
