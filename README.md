@@ -59,9 +59,15 @@ def load_remote_function(url, local_cache_path="get_url_by_sku_cached.py"):
     exec(code, globals())
 
 # Пример использования
+
+# Ссылка на источник (открываем файл на гите, нажимаем формат raw, копируем ссылку)
 GET_WB_PHOTO_URL_SOURCE = (
-    "https://github.com/igorstarun/bigdata-shared-utils/blob/main/wb/images_retrieval/wb_get_url_by_sku.py")
+    "https://raw.githubusercontent.com/igorstarun/bigdata-shared-utils/main/wb/images_retrieval/wb_get_url_by_sku.py")
+
+# Путь, куда сохранить кэшированную версию кода
 GET_WB_PHOTO_URL_LOCAL_PATH = "project_files/etl/get_url_by_sku_cached.py"
+
+# Вызов функции
 load_remote_function(GET_WB_PHOTO_URL_SOURCE, GET_WB_PHOTO_URL_LOCAL_PATH)
 
 # Теперь функция доступна
