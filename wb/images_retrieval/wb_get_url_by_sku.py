@@ -63,4 +63,4 @@ def get_url_by_sku(sku, image_num=1, size='c246x328'):
     vol = custom_floor(sku / 100000)
     part = custom_floor(sku / 1000)
 
-    return f"https://basket-{_get_basket(sku)}.wbbasket.ru/vol{vol}/part{part}/{sku}/images/{size}/{image_num}.jpg"
+    return f"https://basket-{_get_basket(sku)}.wbbasket.ru/vol{vol}/part{part}/{sku}/images/{size}/{image_num}.webp"
