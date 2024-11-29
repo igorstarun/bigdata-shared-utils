@@ -18,13 +18,18 @@ def get_url_by_sku(sku, image_num=1, size='c246x328'):
 
     :param sku: номер SKU
     :param image_num: порядковый номер фотографии в карточке
-    :param size: размер картинки (big или c246x328)
+    :param size: размер картинки (например, 'big' или 'c246x328')
     :return: ссылка на товар
     """
-
     def _get_basket(sku):
+        """
+        Определяет номер корзины на основе SKU.
+
+        :param sku: номер SKU
+        :return: номер корзины
+        """
         sku_floor = custom_floor(sku / 100000)
-        if sku_floor <= 143:
+        if 0 <= sku_floor <= 143:
             return '01'
         elif sku_floor <= 287:
             return '02'
@@ -58,9 +63,17 @@ def get_url_by_sku(sku, image_num=1, size='c246x328'):
             return '16'
         elif sku_floor <= 2837:
             return '17'
-        return '18'
+        elif sku_floor <= 3053:
+            return '18'
+        elif sku_floor <= 3269:
+            return '19'
+        elif sku_floor <= 3485:
+            return '20'
+        return '21'
 
+    # Определение vol и part
     vol = custom_floor(sku / 100000)
     part = custom_floor(sku / 1000)
 
+    # Формирование URL
     return f"https://basket-{_get_basket(sku)}.wbbasket.ru/vol{vol}/part{part}/{sku}/images/{size}/{image_num}.webp"
