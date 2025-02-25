@@ -71,7 +71,9 @@ def get_url_by_sku(sku, image_num=1, size='c246x328'):
             return '20'
         elif sku_floor <= 3701:
             return '21'
-        return '22'
+        elif sku_floor <= 3917:
+            return '22'
+        return '23'
 
     # Определение vol и part
     vol = custom_floor(sku / 100000)
