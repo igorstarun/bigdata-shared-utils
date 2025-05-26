@@ -12,23 +12,25 @@ def custom_floor(value):
     return int_value
 
 
-def get_url_by_sku(sku, image_num=1, size='c246x328'):
+def get_url_by_sku(sku: int, image_num: int = 1, size: str = 'c246x328') -> str:
     """
-    Функция возвращает ссылку на картинку товара с WB.
+    Формирует ссылку на картинку товара Wildberries.
 
-    :param sku: номер SKU
-    :param image_num: порядковый номер фотографии в карточке
-    :param size: размер картинки (например, 'big' или 'c246x328')
-    :return: ссылка на товар
+    :param sku:   SKU товара
+    :param image_num: номер картинки в карточке (начинается с 1)
+    :param size:  размер изображения, например 'big' или 'c246x328'
+    :return:      URL изображения
     """
-    def _get_basket(sku):
-        """
-        Определяет номер корзины на основе SKU.
 
-        :param sku: номер SKU
-        :return: номер корзины
+    def _get_basket(sku: int) -> str:
         """
-        sku_floor = custom_floor(sku / 100000)
+        Определяет номер корзины («basket-XX») по SKU.
+
+        :param sku: SKU товара
+        :return:    строка с номером корзины, всегда две цифры
+        """
+        sku_floor = custom_floor(sku / 100_000)
+
         if 0 <= sku_floor <= 143:
             return '01'
         elif sku_floor <= 287:
@@ -79,11 +81,17 @@ def get_url_by_sku(sku, image_num=1, size='c246x328'):
             return '24'
         elif sku_floor <= 4565:
             return '25'
-        return '26'
+        elif sku_floor <= 4877:
+            return '26'
+        elif sku_floor <= 5189:
+            return '27'
+        elif sku_floor <= 5501:
+            return '28'
+        # Если когда-то появятся новые бакеты — по умолчанию оставляем последний
+        return '28'
 
-    # Определение vol и part
-    vol = custom_floor(sku / 100000)
-    part = custom_floor(sku / 1000)
+    vol  = custom_floor(sku / 100_000)
+    part = custom_floor(sku /   1_000)
 
-    # Формирование URL
-    return f"https://basket-{_get_basket(sku)}.wbbasket.ru/vol{vol}/part{part}/{sku}/images/{size}/{image_num}.webp"
+    basket = _get_basket(sku)
+    return f"https://basket-{basket}.wbbasket.ru/vol{vol}/part{part}/{sku}/images/{size}/{image_num}.webp"
