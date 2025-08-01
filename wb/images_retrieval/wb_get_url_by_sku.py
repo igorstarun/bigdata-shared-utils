@@ -88,7 +88,7 @@ def get_url_by_sku(sku: int, image_num: int = 1, size: str = 'c246x328') -> str:
         elif sku_floor <= 5501:
             return '28'
         # Если когда-то появятся новые бакеты — по умолчанию оставляем последний
-        return '28'
+        return '29'
 
     vol  = custom_floor(sku / 100_000)
     part = custom_floor(sku /   1_000)
