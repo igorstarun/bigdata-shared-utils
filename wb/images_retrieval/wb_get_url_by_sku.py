@@ -16,10 +16,10 @@ def get_url_by_sku(sku: int, image_num: int = 1, size: str = 'c246x328') -> str:
     """
     Формирует ссылку на картинку товара Wildberries.
 
-    :param sku:   SKU товара
+    :param sku: SKU товара
     :param image_num: номер картинки в карточке (начинается с 1)
-    :param size:  размер изображения, например 'big' или 'c246x328'
-    :return:      URL изображения
+    :param size: размер изображения, например 'big' или 'c246x328'
+    :return: URL изображения
     """
 
     def _get_basket(sku: int) -> str:
@@ -27,7 +27,7 @@ def get_url_by_sku(sku: int, image_num: int = 1, size: str = 'c246x328') -> str:
         Определяет номер корзины («basket-XX») по SKU.
 
         :param sku: SKU товара
-        :return:    строка с номером корзины, всегда две цифры
+        :return: строка с номером корзины, всегда две цифры
         """
         sku_floor = custom_floor(sku / 100_000)
 
@@ -110,11 +110,11 @@ def get_url_by_sku(sku: int, image_num: int = 1, size: str = 'c246x328') -> str:
         elif sku_floor <= 9173:
             return '39'
         elif sku_floor <= 9605:
-            return '40'  # Если когда-то появятся новые бакеты — по умолчанию оставляем последний
-        return '40'
+            return '40'
+        return '41'
 
-    vol  = custom_floor(sku / 100_000)
-    part = custom_floor(sku /   1_000)
+    vol = custom_floor(sku / 100_000)
+    part = custom_floor(sku / 1_000)
 
     basket = _get_basket(sku)
     return f"https://basket-{basket}.wbbasket.ru/vol{vol}/part{part}/{sku}/images/{size}/{image_num}.webp"
